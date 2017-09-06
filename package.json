@@ -1,0 +1,23 @@
+{
+  "name": "node.training",
+  "version": "0.0.1",
+  "description": "A simple node application for training",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mujib517/node.training.git"
+  },
+  "author": "MD M Rahman <mujib517@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mujib517/node.training/issues"
+  },
+  "homepage": "https://github.com/Mujib517/node.training#readme"
+}

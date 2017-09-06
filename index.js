@@ -1,32 +1,30 @@
+var http = require('http');
+var fs = require('fs');
 
-var math = require('./math');
+function handler(req, res) {
+
+    switch (req.url) {
+        case '/books':
+            res.write("Books page");
+            break;
+        case '/products':
+             var content = fs.readFileSync("products.html");
+            res.write(content.toString());
+            break;
+        case '/authors':
+            res.write("List of authors");
+            break;
+        default:
+            var content = fs.readFileSync("index.html");
+            res.write(content.toString());
+            break;
+    }
+    res.end();
+}
 
 
-var c = math.add(2, 3);
-console.log(c);
+var server = http.createServer(handler);
 
+server.listen(3000);
 
-
-// function add(a,b) {
-//     return a+b;
-// }
-
-// var c=add(10,20);
-// console.log(c);
-
-
-// function addAsync(a, b,callback) {
-
-//     //simulate some delay
-//     setTimeout(function () {
-//         var c=a+b;
-//         callback(c);
-//     }, 3000);
-
-// }
-
-// function callback(result){
-//     console.log(result);
-// }
-
-// addAsync(20,30,callback);
+console.log("Server running on port 3000");
