@@ -1,30 +1,49 @@
-var http = require('http');
-var fs = require('fs');
 
-function handler(req, res) {
+// function add(a,b){
+//     a++;
+//     b++;
+//     return a+b;
+// }
 
-    switch (req.url) {
-        case '/books':
-            res.write("Books page");
-            break;
-        case '/products':
-             var content = fs.readFileSync("products.html");
-            res.write(content.toString());
-            break;
-        case '/authors':
-            res.write("List of authors");
-            break;
-        default:
-            var content = fs.readFileSync("index.html");
-            res.write(content.toString());
-            break;
-    }
-    res.end();
-}
+// var c=add(2,3);
+
+// console.log(c);
 
 
-var server = http.createServer(handler);
 
-server.listen(3000);
+// function addAsync(a, b,cb) {
 
-console.log("Server running on port 3000");
+//     setTimeout(function () {
+//         var c= a + b;
+//         cb(c);
+//     }, 3000);
+// }
+
+// function callback(result) {
+//     console.log(result);
+// }
+
+// addAsync(2, 3,callback);
+
+var express = require('express');
+var bookRouter = require('./routes/book.router');
+var productRouter = require('./routes/product.router');
+
+var app = express();
+app.listen(3000);
+
+app.get('/', function (req, res) {
+    res.send("Hello world");
+});
+
+//SRP ==Single Responsibility Principle
+//MEAN == mongo Express Agnular Node
+
+// app.get('/books', bookCtrl);
+
+app.use('/books', bookRouter);
+app.use('/products', productRouter);
+
+
+
+console.log("Server running on 3000");

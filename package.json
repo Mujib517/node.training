@@ -4,6 +4,7 @@
   "description": "A simple node application for training",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.15.4",
     "request": "^2.81.0"
   },
   "devDependencies": {},
