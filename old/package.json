@@ -1,24 +1,24 @@
 {
   "name": "node.training",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A simple node application for training",
   "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.4",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mujib517/node.training.git"
   },
-  "keywords": [],
   "author": "MD M Rahman <mujib517@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Mujib517/node.training/issues"
   },
-  "homepage": "https://github.com/Mujib517/node.training#readme",
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.4"
-  }
+  "homepage": "https://github.com/Mujib517/node.training#readme"
 }

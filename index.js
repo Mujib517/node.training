@@ -1,49 +1,18 @@
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-// function add(a,b){
-//     a++;
-//     b++;
-//     return a+b;
-// }
+const defaultRouter = require('./routes/default.router');
+const bugRouter = require('./routes/bug.router');
 
-// var c=add(2,3);
-
-// console.log(c);
+const port = process.env.PORT | 3000;
 
 
+app.listen(port);
+console.log("Server is running on port " + port);
 
-// function addAsync(a, b,cb) {
+app.use(bodyParser.json());
 
-//     setTimeout(function () {
-//         var c= a + b;
-//         cb(c);
-//     }, 3000);
-// }
-
-// function callback(result) {
-//     console.log(result);
-// }
-
-// addAsync(2, 3,callback);
-
-var express = require('express');
-var bookRouter = require('./routes/book.router');
-var productRouter = require('./routes/product.router');
-
-var app = express();
-app.listen(3000);
-
-app.get('/', function (req, res) {
-    res.send("Hello world");
-});
-
-//SRP ==Single Responsibility Principle
-//MEAN == mongo Express Agnular Node
-
-// app.get('/books', bookCtrl);
-
-app.use('/books', bookRouter);
-app.use('/products', productRouter);
-
-
-
-console.log("Server running on 3000");
+//Route Config
+app.use('/', defaultRouter);
+app.use('/bugs', bugRouter);
