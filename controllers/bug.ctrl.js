@@ -4,18 +4,18 @@ const BugModel = require('../models/bug.model');
 var bugCtrl = {
 
     get: function (req, res) {
-        //pageSize:10
-        //pageIndex=0;
-
+       
         let totalRecords = 0;
-        let pageSize = 2;
+
+        let pageSize = req.params.pageSize ? +req.params.pageSize : 5;
+        let pageIndex = +req.params.pageIndex | 0;
 
         BugModel.count(function (err, count) {
             if (count) totalRecords = count;
         });
 
         let query = BugModel.find();
-
+        query.skip(pageIndex * pageSize);
         query.limit(pageSize);
 
         //Select * from bugs

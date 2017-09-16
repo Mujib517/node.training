@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const defaultRouter = require('./routes/default.router');
 const bugRouter = require('./routes/bug.router');
+const userRouter = require('./routes/user.router');
 
 const port = process.env.PORT | 3000;
 
@@ -18,3 +19,4 @@ app.use(bodyParser.json());
 //Route Config
 app.use('/', defaultRouter);
 app.use('/api/bugs', bugRouter);
+app.use('/api/users', userRouter);
