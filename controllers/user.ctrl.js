@@ -1,5 +1,6 @@
 //revealing module design pattern
 const UserModel = require('../models/user.model');
+const jwt = require('jsonwebtoken');
 
 function UserCtrl() {
 
@@ -28,21 +29,32 @@ function UserCtrl() {
     var login = (req, res) => {
 
         UserModel.findOne({ email: req.body.email, password: req.body.password }, function (err, user) {
-            console.log(user, err);
             if (!user) {
                 res.status(500);
-                res.send(err);
+                res.send("Invalid username or password");
             }
             else {
+                var token = jwt.sign(user.email, "secret",{expiresIn:'1h'});
                 res.status(200);
-                res.send("Logged in");
+                res.send({
+                    email: user.email,
+                    token: token
+                });
             }
         });
     };
 
+    var validate = (username, password, cb) => {
+        UserModel.findOne({ email: username, password: password }, function (err, user) {
+            cb(user);
+        });
+    }
+
+
     return {
         post: post,
-        login: login
+        login: login,
+        validate: validate
     }
 
 };
