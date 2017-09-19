@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const defaultRouter = require('./routes/default.router');
 const bugRouter = require('./routes/bug.router');
 const userRouter = require('./routes/user.router');
+const commentRouter = require('./routes/comment.router');
 const middlewares = require('./middlewares');
 
 const port = process.env.PORT | 3000;
@@ -13,6 +14,7 @@ const port = process.env.PORT | 3000;
 app.listen(port);
 console.log("Server is running on port " + port);
 
+mongoose.Promise=global.Promise;
 mongoose.connection.openUri("mongodb://localhost:27017/bugsdb");
 
 app.use(bodyParser.json());
@@ -23,20 +25,8 @@ app.use('/api/users', userRouter);
 
 
 //app.use(isAuthenticated);
-app.use(middlewares.isValidToken);
+//app.use(middlewares.isValidToken);
 
 //private route
 app.use('/api/bugs', bugRouter);
-
-
-
-// addAsync(a, b, cb){
-//     setTimeout(function () {
-//         cb(a + b)
-//     });
-
-// }
-
-// addAsync(2, 3, function (c) {
-//     console.log(c);
-// });
+app.use('/api/comments', commentRouter);

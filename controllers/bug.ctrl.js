@@ -1,10 +1,11 @@
 const BugModel = require('../models/bug.model');
+const CommentModel = require('../models/comment.model');
 
 
 var bugCtrl = {
 
     get: function (req, res) {
-       
+
         let totalRecords = 0;
 
         let pageSize = req.params.pageSize ? +req.params.pageSize : 5;
@@ -58,14 +59,22 @@ var bugCtrl = {
 
     getById: function (req, res) {
 
-        //let id = parseInt(req.params.id);
-        //let id = +req.params.id;
-
         BugModel.findById(req.params.id, function (err, bug) {
 
             if (bug) {
-                res.status(200);
-                res.json(bug);
+
+                let jsonBug = bug.toJSON();
+
+                CommentModel.find({ bugId: bug._id.toString() }).exec()
+                    .then(function (comments) {
+                        jsonBug.comments=comments;
+                        res.status(200);
+                        res.json(jsonBug);
+                    })
+                    .catch(function (err) {
+                        res.status(500);
+                        res.send(err);
+                    });
             }
             else {
                 res.status(404);
