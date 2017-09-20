@@ -19,7 +19,7 @@ console.log("Server is running on port " + port);
 // mongoose.connection.openUri("mongodb://admin:admin@ds143744.mlab.com:43744/bugsdb");
 
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 //Route Config.public routes
 app.use('/', defaultRouter);
