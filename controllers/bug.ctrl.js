@@ -13,30 +13,32 @@ var bugCtrl = {
 
         BugModel.count(function (err, count) {
             if (count) totalRecords = count;
+
+            let query = BugModel.find();
+            query.skip(pageIndex * pageSize);
+            query.limit(pageSize);
+
+            //Select * from bugs
+            query.exec(function (err, bugs) {
+                if (err) {
+                    res.status(500);
+                    res.send("Internal Server Error");
+                }
+                else {
+                    let response = {
+                        data: bugs,
+                        metadata: {
+                            totalRecords: totalRecords,
+                            totalPages: Math.ceil(totalRecords / pageSize)
+                        }
+                    };
+                    res.status(200); //OK
+                    res.json(response);
+                }
+            });
         });
 
-        let query = BugModel.find();
-        query.skip(pageIndex * pageSize);
-        query.limit(pageSize);
 
-        //Select * from bugs
-        query.exec(function (err, bugs) {
-            if (err) {
-                res.status(500);
-                res.send("Internal Server Error");
-            }
-            else {
-                let response = {
-                    data: bugs,
-                    metadata: {
-                        totalRecords: totalRecords,
-                        totalPages: Math.ceil(totalRecords / pageSize)
-                    }
-                };
-                res.status(200); //OK
-                res.json(response);
-            }
-        });
     },
 
     post: function (req, res) {
@@ -67,7 +69,7 @@ var bugCtrl = {
 
                 CommentModel.find({ bugId: bug._id.toString() }).exec()
                     .then(function (comments) {
-                        jsonBug.comments=comments;
+                        jsonBug.comments = comments;
                         res.status(200);
                         res.json(jsonBug);
                     })
