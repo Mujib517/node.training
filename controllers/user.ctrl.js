@@ -26,7 +26,7 @@ function UserCtrl() {
 
     };
 
-    var login = (req, res) => {
+    var login = function (req, res) {
 
         UserModel.findOne({ email: req.body.email, password: req.body.password }, function (err, user) {
             if (!user) {
@@ -34,7 +34,7 @@ function UserCtrl() {
                 res.send("Invalid username or password");
             }
             else {
-                var token = jwt.sign(user.email, "secret",{expiresIn:'1h'});
+                var token = jwt.sign(user.email, "secret", { expiresIn: '1h' });
                 res.status(200);
                 res.send({
                     email: user.email,
@@ -44,7 +44,7 @@ function UserCtrl() {
         });
     };
 
-    var validate = (username, password, cb) => {
+    var validate = function (username, password, cb) {
         UserModel.findOne({ email: username, password: password }, function (err, user) {
             cb(user);
         });
