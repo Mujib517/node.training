@@ -6,7 +6,7 @@ function UserCtrl() {
 
     var post = function (req, res) {
 
-        let user = new UserModel(req.body);
+        var user = new UserModel(req.body);
 
         user.save(function (err, user) {
 

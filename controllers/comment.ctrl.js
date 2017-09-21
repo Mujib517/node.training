@@ -4,7 +4,7 @@ module.exports = {
 
     post: function (req, res) {
 
-        let comment = new Comment(req.body);
+        var comment = new Comment(req.body);
 
         comment.save(function (err, data) {
 

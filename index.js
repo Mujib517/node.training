@@ -14,7 +14,7 @@ const port = process.env.PORT | 3000;
 app.listen(port);
 console.log("Server is running on port " + port);
 
-mongoose.Promise=global.Promise;
+//mongoose.Promise=global.Promise;
 //mongoose.connection.openUri("mongodb://localhost:27017/bugsdb");
 mongoose.connection.openUri("mongodb://admin:admin@ds143744.mlab.com:43744/bugsdb");
 

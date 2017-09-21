@@ -15,8 +15,8 @@ module.exports = {
 
     isAuthenticated: function (req, res, next) {
 
-        let username = req.headers["username"];
-        let password = req.headers["password"];
+        var username = req.headers["username"];
+        var password = req.headers["password"];
 
         if (!username || !password) {
             res.status(401);//unauthorized

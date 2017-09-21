@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let comment = {
+var comment = {
     bugId: { type: String, required: true },
     name: { type: String, required: true },
     subject: { type: String, required: true },

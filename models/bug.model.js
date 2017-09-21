@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let bugSchema = new mongoose.Schema({
+var bugSchema = new mongoose.Schema({
     name: String,
     category: String,
     description: String

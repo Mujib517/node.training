@@ -6,15 +6,15 @@ var bugCtrl = {
 
     get: function (req, res) {
 
-        let totalRecords = 0;
+        var totalRecords = 0;
 
-        let pageSize = req.params.pageSize ? +req.params.pageSize : 5;
-        let pageIndex = +req.params.pageIndex | 0;
+        var pageSize = req.params.pageSize ? +req.params.pageSize : 5;
+        var pageIndex = +req.params.pageIndex | 0;
 
         BugModel.count(function (err, count) {
             if (count) totalRecords = count;
 
-            let query = BugModel.find();
+            var query = BugModel.find();
             query.skip(pageIndex * pageSize);
             query.limit(pageSize);
 
@@ -25,7 +25,7 @@ var bugCtrl = {
                     res.send("Internal Server Error");
                 }
                 else {
-                    let response = {
+                    var response = {
                         data: bugs,
                         metadata: {
                             totalRecords: totalRecords,
@@ -43,7 +43,7 @@ var bugCtrl = {
 
     post: function (req, res) {
 
-        let bug = new BugModel(req.body);
+        var bug = new BugModel(req.body);
 
         bug.save(function (err, bug) {
 
@@ -65,7 +65,7 @@ var bugCtrl = {
 
             if (bug) {
 
-                let jsonBug = bug.toJSON();
+                var jsonBug = bug.toJSON();
 
                 CommentModel.find({ bugId: bug._id.toString() }).exec()
                     .then(function (comments) {
@@ -88,7 +88,7 @@ var bugCtrl = {
 
     update: function (req, res) {
 
-        let bug = new BugModel(req.body);
+        var bug = new BugModel(req.body);
 
         BugModel.findByIdAndUpdate(req.params.id, bug, function (err, updatedBug) {
             if (!err) {
